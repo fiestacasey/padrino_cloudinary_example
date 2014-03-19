@@ -1,0 +1,14 @@
+#images
+  %p Drop images below or click the button to browse your images.
+  .row.images#dropzone
+    -Image.all.each do |image|
+      .thumbnail
+        =link_to image.image_url, :target => "_blank" do 
+          =image_tag image.image_url("60x95", :crop => :thumb)
+        =link_to url(:images, :destroy, :id => image.id), :method => 'delete', :class => 'destroy', :remote => true do
+          %span.glyphicon.glyphicon-trash
+
+    .clearfix
+  .row.file-field-wrap
+    %input{:type => 'file', :name => 'files[]', 'data-url' => url(:images, :create), :multiple => 'multiple'}
+    %a{:href => 'javascript:void(0);', :class => "btn btn-default"} Browse Your Images
