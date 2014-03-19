@@ -5,7 +5,7 @@ This is an example app of how to use Cloudinary with Padrino as defined in the b
 ## Getting Started
 
 1. configure
-set up your cloudinary environment configuration as defined in the [cloudinary_initializer.rb](/blob/master/lib/cloudinary_initializer.rb)
+set up your cloudinary environment configuration as defined in the [cloudinary_initializer.rb](/lib/cloudinary_initializer.rb)
 
 2. run
         
