@@ -23,7 +23,6 @@ module AssetHelper
         super
       end
 
-
       require 'cloudinary/helper'
       def image_url(size_b = "", options={})
 
@@ -31,15 +30,21 @@ module AssetHelper
         width = width.gsub(/[^0-9]/, "") if width
         height = height.gsub(/[^0-9]/, "") if height
 
-        format = options[:format]||self.format||"jpg" # format is required for transformations
         if width or height
-          Cloudinary::Utils.cloudinary_url self.key, {:size => "#{width}x#{height}", :crop => :fit, :format => format}.merge(options)
+          Cloudinary::Utils.cloudinary_url self.key, {:size => "#{width}x#{height}", :crop => :fit, :format => translate_format(options)}.merge(options)
         else
           Cloudinary::Utils.cloudinary_url self.key, {:format => format}.merge(options)
         end 
       end
 
       private
+
+
+        def translate_format(options={})
+            f = (options[:format]||self.format||"jpg").downcase
+            # make sure it is a supported cloudinary format
+            ["jpg", "png", "gif", "bmp", "tiff", "ico", "pdf", "eps", "psd", "webp"].select{|x| f.include?(x)}.last || "jpg"
+        end
 
         def remove_from_cloudinary
           puts "deleting #{self.key}"
