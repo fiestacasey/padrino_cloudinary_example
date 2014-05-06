@@ -11,7 +11,6 @@ set up your cloudinary environment configuration as defined in the [cloudinary_i
         
         bundle
         rake db:migrate
-        password
         padrino start
 
 3. visit localhost:3000
